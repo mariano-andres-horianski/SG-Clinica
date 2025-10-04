@@ -7,24 +7,24 @@ public class Nino extends Paciente implements IPrioridad{
 	}
 
 	@Override
-	public IPrioridad prioridadSala(IPrioridad paciente) {
-		return paciente.compararConNino(this);
+	public boolean prioridadSala(IPrioridad paciente) {
+		return paciente.compararConNino();
 	}
 
 	@Override
-	public IPrioridad compararConNino(IPrioridad nino) {
-		return nino;
+	public boolean compararConNino() {
+		return false;
 	}
 
 	@Override
-	public IPrioridad compararConJoven(IPrioridad joven) {
-		return this;
+	public boolean compararConJoven() {
+		return true;
 	}
 
 	@Override
-	public IPrioridad compararConMayor(IPrioridad mayor) {
-		return mayor;
+	public boolean compararConMayor() {
+		return false;
 	}
-
 	
 }
+
