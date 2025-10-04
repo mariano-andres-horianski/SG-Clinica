@@ -33,13 +33,12 @@ public class SingletonClinica {
 		if(!salaDeEspera.isOcupacion())
 			this.salaDeEspera.ocuparSala(nuevoPaciente);
 		else {
-			IPrioridad pacienteActual = this.salaDeEspera.getPaciente();
-			if(pacienteActual == pacienteActual.prioridadSala(nuevoPaciente))
-				patio.add(nuevoPaciente);
-			else {
+			if (salaDeEspera.getPaciente().prioridadSala(nuevoPaciente) ) {
+				patio.add(salaDeEspera.getPaciente());
 				this.salaDeEspera.ocuparSala(nuevoPaciente);
-				patio.add(pacienteActual);
 			}
+			else 
+				patio.add(nuevoPaciente);
 		}
 	}
 }
