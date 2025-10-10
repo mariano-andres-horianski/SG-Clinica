@@ -57,7 +57,16 @@ public class Prueba {
 			System.out.println(factura1);
 			System.out.println(factura2);
 			
-		} catch (PacienteNotFoundException e) {
+			// ----------------- Generar reportes -----------------
+			LocalDate desde = LocalDate.of(2025, 9, 1);
+			LocalDate hasta = LocalDate.of(2025, 10, 31);
+
+			Reporte reporte1 = clinica.generarReporte(medico1, desde, hasta);
+			System.out.println(reporte1);
+			Reporte reporte2 = clinica.generarReporte(medico2, desde, hasta);
+			System.out.println(reporte2);
+			
+		} catch (PacienteNotFoundException | MedicoNotRegisteredException e) {
 			e.printStackTrace();
 		}
 	}

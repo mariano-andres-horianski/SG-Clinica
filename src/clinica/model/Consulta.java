@@ -2,7 +2,7 @@ package clinica.model;
 
 import java.time.LocalDate;
 
-public class Consulta {
+public class Consulta implements Comparable<Consulta> {
 	private IMedico medico;
 	private Paciente paciente;
 	private double importe;
@@ -44,5 +44,17 @@ public class Consulta {
 		this.fecha = fecha;
 	}
 
+	@Override
+    public int compareTo(Consulta otra) {
+        if (this.fecha == null && otra.fecha == null) 
+        	return 0; 	  // ambas null => iguales
+        else if (this.fecha == null) 
+        	return 1;     // this > otra
+        else if (otra.fecha == null) 
+        	return -1;    // this < otra
+        // las fechas null son mayores a cualquier fecha no null
+
+        return this.fecha.compareTo(otra.fecha);
+    }
 	
 }

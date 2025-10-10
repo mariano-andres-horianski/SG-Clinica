@@ -37,10 +37,4 @@ public abstract class Persona implements IPersona {
 		return domicilio;
 	}
 
-	@Override
-	public String toString() {
-		return "Persona [dni=" + dni + ", nya=" + nya + ", ciudad=" + ciudad + ", telefono=" + telefono + ", domicilio="
-				+ domicilio + "]";
-	}
-
 }

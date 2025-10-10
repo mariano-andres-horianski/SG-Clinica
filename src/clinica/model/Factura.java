@@ -64,21 +64,21 @@ public class Factura {
         sb.append("Cantidad de dias: ").append(cantidadDias).append("\n");
         
         if (habitacion != null) {
-            sb.append("Habitaci�n tipo: ").append(habitacion.getTipo())
-              .append("                        Costo: $")
-              .append(habitacion.calcularCosto(cantidadDias))
-              .append("\n\n");
+            sb.append(String.format("Habitación tipo: %-15s  Costo: $%.2f\n\n",
+                    habitacion.getTipo(),
+                    habitacion.calcularCosto(cantidadDias)));
         }
-        sb.append("\nConsultas Medicas:\n");
+
+        sb.append("Consultas Médicas:\n\n");
 
         for (Consulta c : consultas) {
-            sb.append(c.getMedico()).append("   Subtotal: $").append(c.getImporte()).append("\n");
+            sb.append(String.format("%-60s Subtotal: $%.2f\n",
+                    c.getMedico().toString(),
+                    c.getImporte()));
         }
 
-        sb.append("\nTotal: $").append(total).append("\n");
+        sb.append(String.format("\nTotal: $%.2f\n", total));
         return sb.toString();
     }
-    
-    
 }
 

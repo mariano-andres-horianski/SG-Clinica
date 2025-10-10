@@ -211,6 +211,17 @@ public class SingletonClinica {
 		IHabitacion h = habitacionFactory.crearHabitacion(tipo);
 		return h;
 	}
+	
+	public Reporte generarReporte(IMedico medico, LocalDate fechaInicio, LocalDate fechaFin) throws MedicoNotRegisteredException {
+	    if (!medicos.containsKey(medico.getDni())) {
+	        throw new MedicoNotRegisteredException("El médico no está registrado en la clínica.");
+	    }
+
+	    ArrayList<Consulta> consultasMedico = consultasPorMedico.get(medico);
+
+	    return new Reporte(medico, fechaInicio, fechaFin, consultasMedico);
+	}
+
 
 	public String getNombre() {
 		return nombre;

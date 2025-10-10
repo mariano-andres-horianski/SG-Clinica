@@ -27,7 +27,10 @@ public class Medico extends Persona implements IMedico {
 
 	@Override
 	public String toString() {
-		return "Nombre Medico: " + this.getNya() + "        Especialidad: " + this.especialidad;
+	    return String.format("Nombre Médico: %-20s  Especialidad: %-15s",
+	            this.getNya(),
+	            this.especialidad.toString());
 	}
+
 
 }
