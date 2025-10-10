@@ -94,6 +94,8 @@ public class SingletonClinica {
 		if (!pacientes.containsKey(p.getDni()))
 			throw new PacienteNotFoundException("Paciente no registrado");
 
+		p.setFechaIngreso(LocalDate.now());
+		
 		addListaEspera(p);
 
 		if (!(salaEspera.isOcupacion()))
@@ -123,7 +125,6 @@ public class SingletonClinica {
 			}
 
 			addListaEnAtencion(p);
-			p.setFechaIngreso(LocalDate.now());
 		}
 		
 		Consulta c = new Consulta(m, p);
@@ -149,6 +150,7 @@ public class SingletonClinica {
 		consultasPorPaciente.remove(p);
 		internados.remove(p);
 		removeListaEnAtencion(p);
+		p.setFechaIngreso(null);  // para que si vuelve a atenderse se renueve la fecha
 		
 		return f;
 	}

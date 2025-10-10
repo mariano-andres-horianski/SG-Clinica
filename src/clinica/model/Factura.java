@@ -10,6 +10,7 @@ public class Factura {
 	private final static double costoPorInternacion= 500;
 
 	private int numero;
+	private LocalDate fechaIngreso;
     private LocalDate fechaEgreso;
     private Paciente paciente;
     private IHabitacion habitacion;
@@ -20,6 +21,7 @@ public class Factura {
     public Factura(Paciente paciente, IHabitacion habitacion, ArrayList<Consulta> consultasPaciente) {
         this.numero = contador++;
         this.fechaEgreso = LocalDate.now();
+        this.fechaIngreso = paciente.getFechaIngreso();
         this.paciente = paciente;
         this.consultas = consultasPaciente;
         this.habitacion = habitacion;
@@ -48,7 +50,7 @@ public class Factura {
     }
     
     private long calcularDias() {
-    	long dias = ChronoUnit.DAYS.between(paciente.getFechaIngreso(), fechaEgreso);
+    	long dias = ChronoUnit.DAYS.between(fechaIngreso, fechaEgreso);
         return dias;
     }
     
@@ -57,7 +59,7 @@ public class Factura {
         StringBuilder sb = new StringBuilder();
         sb.append("Nº Factura: ").append(numero).append("\n");
         sb.append("Nombre Paciente: ").append(paciente.getNya()).append("\n");
-        sb.append("Fecha Ingreso: ").append(paciente.getFechaIngreso()).append("\n");
+        sb.append("Fecha Ingreso: ").append(fechaIngreso).append("\n");
         sb.append("Fecha Egreso: ").append(fechaEgreso).append("\n");
         sb.append("Cantidad de dias: ").append(cantidadDias).append("\n");
         
