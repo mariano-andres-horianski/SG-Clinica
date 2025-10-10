@@ -4,7 +4,10 @@ import clinica.d.dispatch.*;
 
 public class PacienteFactory {
 
-    public Paciente crearPaciente(String dni, String nya, String ciudad, String telefono, Domicilio domicilio, int nroHC, String rangoEtario) {
+    public Paciente crearPaciente(String dni, String nya, String ciudad, String telefono, String calle, int altura, int nroHC, String rangoEtario) {
+    	
+    	Domicilio domicilio = new Domicilio(calle, altura);
+    	
         if (rangoEtario.equalsIgnoreCase("Nino")) {
             return new Nino(dni, nya, ciudad, telefono, domicilio, nroHC, rangoEtario);
         }
