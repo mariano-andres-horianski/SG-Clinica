@@ -6,7 +6,10 @@ import clinica.model.IMedico;
  * <p>Añade 5% al honorario del médico.</p>
  */
 public class DecoratorPosgradoMagister extends DecoratorPosgrado {
-
+	/**
+	 * Le añade un posgrado de tipo magister a un médico
+	 * @param encapsulado El médico al que añadirle magister
+	 */
 	public DecoratorPosgradoMagister(IMedico encapsulado) {
 		super(encapsulado);
 	}

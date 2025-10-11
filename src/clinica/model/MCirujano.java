@@ -8,7 +8,9 @@ package clinica.model;
  *
  */
 public class MCirujano extends Especialidad {
-
+	/**
+	 * Crea una instancia de médico cirujano
+	 */
 	public MCirujano() {
 		super("Cirujano");
 	}

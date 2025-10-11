@@ -13,20 +13,30 @@ import java.util.ArrayList;
  * Implementa tanto Singleton como Facade
  * */
 public class SingletonClinica {
+	/**Datos de la clínica**/
 	private String nombre, direccion, telefono, ciudad;
+	/**Instancia del Singleton*/
 	private static SingletonClinica instance;
+	/**Listado de pacientes registrados**/
 	private HashMap<String, Paciente> pacientes;
+	/**Listado de médicos**/
 	private HashMap<String, IMedico> medicos;
+	/**Listado de pacientes internados**/
 	private HashMap<Paciente, IHabitacion> internados;
+	/**Listado de pacientes en espera**/
 	private ArrayList<Paciente> listaEspera;
+	/**Listado de pacientes siendo atendidos actualmente**/
 	private ArrayList<Paciente> listaEnAtencion;
 	private HabitacionFactory habitacionFactory;
 	private PacienteFactory pacienteFactory;
 	private MedicoFactory medicoFactory;
+	/**Lista de consultas filtradas por paciente y otra por médicos para más fácil acceso**/
 	private HashMap<Paciente, ArrayList<Consulta>> consultasPorPaciente;
 	private HashMap<IMedico, ArrayList<Consulta>> consultasPorMedico;
-
+	
+	/**Listado de pacientes en espera en el patio*/
 	private ArrayList<IPrioridad> patio;
+	/**Listado de pacientes en espera en la sala*/
 	private SalaEspera salaEspera;
 
 	private SingletonClinica() {

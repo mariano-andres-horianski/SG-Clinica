@@ -8,7 +8,10 @@ import clinica.model.IMedico;
  */
 public abstract class DecoratorMedico implements IMedico {
 	protected IMedico encapsulado;
-
+	/**
+	 * Guarda un médico con sus datos y le delega la implementación de los métodos
+	 * @param encapsulado El médico del que se quieren obtener los datos
+	 */
 	public DecoratorMedico(IMedico encapsulado) {
 		this.encapsulado = encapsulado;
 	}

@@ -6,7 +6,10 @@ import clinica.model.IMedico;
  * <p>Aumenta sus honorarios en 5%</p>
  */
 public class DecoratorContratacionResidente extends DecoratorContratacion {
-
+	/**
+	 * Añade el tipo de contratación residente a un médico
+	 * @param encapsulado El médico a decorar con contratación residente
+	 */
 	public DecoratorContratacionResidente(IMedico encapsulado) {
 		super(encapsulado);
 	}

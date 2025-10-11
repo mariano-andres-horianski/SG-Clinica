@@ -4,7 +4,10 @@ package clinica.model;
  */
 public abstract class Especialidad {
 	private String nombre; // de la especialidad
-
+	/**
+	 * Crea una especialidad.
+	 * @param nombre Nombre de la espeicalidad
+	 */
 	public Especialidad(String nombre) {
 		this.nombre = nombre;
 	}

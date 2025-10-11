@@ -7,7 +7,9 @@ package clinica.model;
  * </p>
  * */
 public class MPediatra extends Especialidad {
-
+	/**
+	 * Crea una instancia de médico Pediatra
+	 */
 	public MPediatra() {
 		super("Pediatra");
 	}
