@@ -20,7 +20,8 @@ import clinica.model.decorators.*;
  * o formación académica.
  * </p>
  */
-public class MedicoFactory {
+public class MedicoFactory 
+{
 
 	/**
      * Crea un médico base (sin posgrado ni contratación especial) según la especialidad indicada.
@@ -37,7 +38,8 @@ public class MedicoFactory {
      * @throws EspecialidadNotFoundException si la especialidad no es reconocida
      */
 	public IMedico crearMedico(String dni, String nya, String ciudad, String telefono, String calle, int altura,
-			int nroMat, String especialidad) throws EspecialidadNotFoundException {
+			int nroMat, String especialidad) throws EspecialidadNotFoundException 
+	{
 
 		Domicilio d = new Domicilio(calle, altura);
 
@@ -73,14 +75,18 @@ public class MedicoFactory {
      */
 	public IMedico crearMedico(String dni, String nya, String ciudad, String telefono, String calle, int altura,
 			int nroMat, String especialidad, String contratacion)
-			throws EspecialidadNotFoundException, ContratacionNotFoundException {
+			throws EspecialidadNotFoundException, ContratacionNotFoundException 
+	{
 
 		IMedico medico = crearMedico(dni, nya, ciudad, telefono, calle, altura, nroMat, especialidad);
 
 		// contrataciÃ³n
-		if (contratacion.equalsIgnoreCase("residente")) {
+		if (contratacion.equalsIgnoreCase("residente")) 
+		{
 			medico = new DecoratorContratacionResidente(medico);
-		} else if (contratacion.equalsIgnoreCase("permanente")) {
+		} 
+		else if (contratacion.equalsIgnoreCase("permanente")) 
+		{
 			medico = new DecoratorContratacionPermanente(medico);
 		} else
 			throw new ContratacionNotFoundException("ContrataciÃ³n no encontrada");
@@ -109,16 +115,20 @@ public class MedicoFactory {
      */
 	public IMedico crearMedico(String dni, String nya, String ciudad, String telefono, String calle, int altura,
 			int nroMat, String especialidad, String contratacion, String posgrado)
-			throws EspecialidadNotFoundException, ContratacionNotFoundException, PosgradoNotFoundException {
+			throws EspecialidadNotFoundException, ContratacionNotFoundException, PosgradoNotFoundException 
+	{
 
 		IMedico medico = crearMedico(dni, nya, ciudad, telefono, calle, altura, nroMat, especialidad, contratacion);
 
 		// posgrado
 		if (posgrado.equalsIgnoreCase("magister")) {
 			medico = new DecoratorPosgradoMagister(medico);
-		} else if (posgrado.equalsIgnoreCase("doctorado")) {
+		} 
+		else if (posgrado.equalsIgnoreCase("doctorado")) 
+		{
 			medico = new DecoratorPosgradoDoctorado(medico);
-		} else
+		} 
+		else
 			throw new PosgradoNotFoundException("Posgrado no encontrado");
 
 		return medico;

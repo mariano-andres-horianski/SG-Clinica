@@ -16,7 +16,8 @@ package clinica.habitaciones;
  * </p>
  *
  */
-public class HabitacionPrivada implements IHabitacion {
+public class HabitacionPrivada implements IHabitacion 
+{
 
     /** Costo base por día de internación en habitación privada. */
     private static final double costoDia = 2000;
@@ -28,23 +29,28 @@ public class HabitacionPrivada implements IHabitacion {
      * @return el costo total calculado según las reglas de la habitación privada
      */
     @Override
-    public double calcularCosto(long dias) {
+    public double calcularCosto(long dias) 
+    {
     	double costo=0;
-        if (dias == 1) {
+        if (dias == 1) 
+        {
             costo=costoDia;
         } 
         else 
-        	if (dias <= 5) {
+        	if (dias <= 5) 
+        	{
         		costo= dias * costoDia * 1.3;
         	} 
-        	else {
+        	else 
+        	{
         		costo=  dias * costoDia * 2;
         	}
         return costo;
     }
 
     @Override
-    public String getTipo() {
+    public String getTipo() 
+    {
         return "Habitación privada";
     }
 }

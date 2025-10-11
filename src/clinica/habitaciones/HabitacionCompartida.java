@@ -18,7 +18,8 @@ package clinica.habitaciones;
  *   <li><code>dias</code> = cantidad de días de internación</li>
  * </ul>
  */
-public class HabitacionCompartida implements IHabitacion {
+public class HabitacionCompartida implements IHabitacion 
+{
     /** Costo base por día de internación en habitación compartida. */
     private static final double costoDia = 1000; 
     /**
@@ -28,12 +29,14 @@ public class HabitacionCompartida implements IHabitacion {
      * @return el costo total proporcional a la cantidad de días
      */
     @Override
-    public double calcularCosto(long dias) {
+    public double calcularCosto(long dias) 
+    {
         return dias * costoDia;
     }
 
     @Override
-    public String getTipo() {
+    public String getTipo() 
+    {
         return "Habitación compartida";
     }
 }

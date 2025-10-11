@@ -12,27 +12,32 @@ public class Mayor extends Paciente implements IPrioridad {
 	 * @param nroHC Número de historia clínica
 	 * @param rangoEtario Rango etario del paciente
 	 */
-	public Mayor(String dni, String nya, String ciudad, String telefono, Domicilio domicilio, int nroHC, String rangoEtario) {
+	public Mayor(String dni, String nya, String ciudad, String telefono, Domicilio domicilio, int nroHC, String rangoEtario) 
+	{
 		super(dni, nya, ciudad, telefono, domicilio, nroHC, rangoEtario);
 	}
 
 	@Override
-	public boolean prioridadSala(IPrioridad paciente) {
+	public boolean prioridadSala(IPrioridad paciente) 
+	{
 		return paciente.compararConMayor();
 	}
 
 	@Override
-	public boolean compararConNino() {
+	public boolean compararConNino() 
+	{
 		return true;
 	}
 
 	@Override
-	public boolean compararConJoven() {
+	public boolean compararConJoven() 
+	{
 		return false;
 	}
 
 	@Override
-	public boolean compararConMayor() {
+	public boolean compararConMayor() 
+	{
 		return false;
 	}
 

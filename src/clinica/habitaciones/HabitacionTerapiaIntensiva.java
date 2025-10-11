@@ -21,7 +21,8 @@ package clinica.habitaciones;
  *
  *
  */
-public class HabitacionTerapiaIntensiva implements IHabitacion {
+public class HabitacionTerapiaIntensiva implements IHabitacion 
+{
 	 /** Costo base por día de internación en terapia intensiva. */
 	private static final double costoDia = 5000;
 	/**
@@ -35,12 +36,14 @@ public class HabitacionTerapiaIntensiva implements IHabitacion {
      * @return el costo total calculado para el período especificado
      */
     @Override
-    public double calcularCosto(long dias) {
+    public double calcularCosto(long dias) 
+    {
         return Math.pow(costoDia, dias);
     }
     
     @Override
-    public String getTipo() {
+    public String getTipo() 
+    {
         return "Terapia intensiva";
     }
 }

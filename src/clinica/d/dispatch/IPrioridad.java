@@ -8,7 +8,8 @@ package clinica.d.dispatch;
 	 * 
 	 */
 
-public interface IPrioridad{
+public interface IPrioridad
+{
 	
 	/**
 	 * Evalua si el paciente pasado por parámetro tiene prioridad por sobre el que está en la sala
