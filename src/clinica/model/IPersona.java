@@ -8,6 +8,7 @@ package clinica.model;
  * </p>
  */
 public interface IPersona {
+	
 	public String getDni();
 
 	public String getNya();

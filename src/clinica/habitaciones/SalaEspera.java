@@ -17,6 +17,7 @@ public class SalaEspera {
 	
 	/**
 	 * Ocupa la sala con el paciente indicado
+	 * <b>pre: </b>el paciente enviado como argumento está registrado<br>
 	 * @param paciente El paciente que ocupará la sala
 	 */
 	public void ocuparSala(IPrioridad paciente) {

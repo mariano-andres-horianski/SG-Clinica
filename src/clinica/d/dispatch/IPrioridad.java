@@ -13,6 +13,7 @@ public interface IPrioridad{
 	/**
 	 * Evalua si el paciente pasado por parámetro tiene prioridad por sobre el que está en la sala
 	 * <p>El método delegará la evaluación en el argumento implementando así el doble dispatch</p>
+	 *<b>pre: </b>el paciente enviado como argumento debe existir<br>
 	 * @param paciente
 	 * @return verdadero si este paciente tiene prioridad y falso si no la tiene
 	 */
