@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 /**
  * Representa la factura generada al egresar un paciente de la clínica.
- * <p>
+ * 
  * La factura incluye:
  * <ul>
  *   <li>Número de factura autoincrementable</li>
@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit;
  *   <li>Listado de consultas médicas recibidas con su subtotal</li>
  *   <li>Total a pagar, incluyendo honorarios médicos y costos de internación</li>
  * </ul>
- * </p>
+ * 
  */
 public class Factura {
 	/** Contador autoincremental de número de factura. */

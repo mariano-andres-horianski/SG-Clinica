@@ -1,0 +1,7 @@
+clinica
+clinica.d.dispatch
+clinica.exceptions
+clinica.factories
+clinica.habitaciones
+clinica.model
+clinica.model.decorators

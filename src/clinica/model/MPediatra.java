@@ -1,6 +1,6 @@
 package clinica.model;
 /**
- * Representa la especialidad de <n>Pediatra</n> dentro de la clínica.
+ * Representa la especialidad de <b>Pediatra</b> dentro de la clínica.
  * <p>
  * Extiende la clase Especialidad y define la forma específica
  * de calcular el honorario de un médico pediatra.

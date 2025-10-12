@@ -208,7 +208,7 @@ public class SingletonClinica
 	 *@param m El médico que atenderá al paciente
 	 *@param p El paciente a atender.
 	 *
-	 *@throws PacienteNotFoundExcption si el paciente no está registrado en el sistema indicando  que el paciente no está registrado
+	 *@throws PacienteNotFoundException si el paciente no está registrado en el sistema indicando  que el paciente no está registrado
 	 * */
 	public void atiendePaciente(IMedico m, Paciente p) throws PacienteNotFoundException 
 	{
@@ -426,6 +426,7 @@ public class SingletonClinica
 	 * @param medico El médico del que se quiere generar un reporte
 	 * @param fechaInicio inicio del periodo
 	 * @param fechaFin fin del periodo
+	 * @return un reporte generado en base al periodo indicado
 	 * */
 	public Reporte generarReporte(IMedico medico, LocalDate fechaInicio, LocalDate fechaFin) throws MedicoNotRegisteredException 
 	{

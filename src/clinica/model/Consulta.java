@@ -64,13 +64,13 @@ public class Consulta implements Comparable<Consulta> {
 	}
 	/**
      * Compara esta consulta con otra según la fecha de realización.
-     * <p>
+     *
      * Se utiliza para ordenar consultas cronológicamente:
      * <ul>
      *   <li>Consultas con fecha null se consideran mayores que cualquier fecha definida.</li>
      *   <li>Si ambas fechas son null, se consideran iguales.</li>
      * </ul>
-     * </p>
+     *
      *
      * @param otra La otra consulta a comparar
      * @return un valor negativo, cero o positivo según el orden cronológico

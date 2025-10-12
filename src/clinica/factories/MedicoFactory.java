@@ -6,7 +6,7 @@ import clinica.model.decorators.*;
 /**
  * Fábrica responsable de crear instancias de IMedico según
  * los parámetros proporcionados.
- * <p>
+ * 
  * Esta clase aplica el patrón <b>Factory Method</b> para encapsular la
  * lógica de creación de médicos con distintas combinaciones de:
  * <ul>
@@ -14,7 +14,7 @@ import clinica.model.decorators.*;
  *   <li>Tipo de contratación (residente, permanente)</li>
  *   <li>Posgrado (magíster, doctorado)</li>
  * </ul>
- * 
+ * <p>
  * Puede aplicar decoradores que modifican el comportamiento
  * del médico, como sus honorarios, en función de su tipo de contratación
  * o formación académica.
