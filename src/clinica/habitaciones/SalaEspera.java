@@ -6,7 +6,7 @@ import clinica.d.dispatch.*;
 	 * 
 	 */
 public class SalaEspera {
-	/**Booleano indicando si está o no ocupada la habitación*/
+	/**Booleano indicando si estï¿½ o no ocupada la habitaciï¿½n*/
 	private boolean ocupacion;
 	private IPrioridad paciente;
 	
@@ -17,8 +17,8 @@ public class SalaEspera {
 	
 	/**
 	 * Ocupa la sala con el paciente indicado
-	 * <b>pre: </b>el paciente enviado como argumento está registrado<br>
-	 * @param paciente El paciente que ocupará la sala
+	 * <b>pre: </b>el paciente enviado como argumento estï¿½ registrado<br>
+	 * @param paciente El paciente que ocuparï¿½ la sala
 	 */
 	public void ocuparSala(IPrioridad paciente) {
 		this.paciente = paciente;

@@ -14,13 +14,13 @@ import java.util.ArrayList;
  * */
 public class SingletonClinica 
 {
-	/**Datos de la clínica**/
+	/**Datos de la clï¿½nica**/
 	private String nombre, direccion, telefono, ciudad;
 	/**Instancia del Singleton*/
 	private static SingletonClinica instance;
 	/**Listado de pacientes registrados**/
 	private HashMap<String, Paciente> pacientes;
-	/**Listado de médicos**/
+	/**Listado de mï¿½dicos**/
 	private HashMap<String, IMedico> medicos;
 	/**Listado de pacientes internados**/
 	private HashMap<Paciente, IHabitacion> internados;
@@ -31,7 +31,7 @@ public class SingletonClinica
 	private HabitacionFactory habitacionFactory;
 	private PacienteFactory pacienteFactory;
 	private MedicoFactory medicoFactory;
-	/**Lista de consultas filtradas por paciente y otra por médicos para más fácil acceso**/
+	/**Lista de consultas filtradas por paciente y otra por mï¿½dicos para mï¿½s fï¿½cil acceso**/
 	private HashMap<Paciente, ArrayList<Consulta>> consultasPorPaciente;
 	private HashMap<IMedico, ArrayList<Consulta>> consultasPorMedico;
 	
@@ -74,109 +74,157 @@ public class SingletonClinica
 		return instance;
 	}
 	/**
-     * Registra un médico en la clínica.
-     * <b>pre: </b>la lista de médicos está inicializada<br>
-     * <b>post:</b> se registró un médico con los datos almacenados en el IMédico proveído<br>
-     * @param m El médico a registrar.
+     * Registra un mï¿½dico en la clï¿½nica.
+     * <b>pre: </b>la lista de mï¿½dicos estï¿½ inicializada y m != null<br>
+     * <b>post:</b> se registrï¿½ un mï¿½dico con los datos almacenados en el IMï¿½dico proveï¿½do<br>
+     * @param m El mï¿½dico a registrar.
      */
 	public void registrarMedico(IMedico m) 
 	{
+		assert m != null : "MÃ©dico no puede ser null";
+		assert m.getDni() != null : "El DNI del mÃ©dico no puede ser null";
+		assert this.medicos != null : "La lista de mÃ©dicos no estÃ¡ inicializada";
+		
 		this.medicos.put(m.getDni(), m);
+		
+		assert this.medicos.containsKey(m.getDni()) : "El mÃ©dico no se registrÃ³ correctamente";
 	}
 	/**
-	 * Registra un paciente en la clínica.
-	 * <b>pre: </b>la lista de pacientes está inicializada<br>
-	 * <b>post:</b> se registró un paciente con los datos almacenados en el Paciente proveído<br>
+	 * Registra un paciente en la clï¿½nica.
+	 * <b>pre: </b>la lista de pacientes estï¿½ inicializada y p != null<br>
+	 * <b>post:</b> se registrï¿½ un paciente con los datos almacenados en el Paciente proveï¿½do<br>
 	 * @param p El paciente a registrar.
 	 * */
 	public void registrarPaciente(Paciente p) 
 	{
+		assert p != null : "Paciente no puede ser null";
+		assert p.getDni() != null : "El DNI del paciente no puede ser null";
+		assert this.pacientes != null : "La lista de pacientes no estÃ¡ inicializada";
+		
+		
 		this.pacientes.put(p.getDni(), p);
+		
+		assert pacientes.containsKey(p.getDni()) : "El paciente no se registrÃ³ correctamente";
 	}
 	/**
-	 * Añade un paciente a la lista de espera
-	 * <b>pre: </b>la lista de espera está inicializada y el paciente registrado<br>
-	 * <b>post:</b> el paciente está en la lista de espera<br>
+	 * Aï¿½ade un paciente a la lista de espera
+	 * <b>pre: </b>la lista de espera estï¿½ inicializada y el paciente registrado<br>
+	 * <b>post:</b> el paciente estï¿½ en la lista de espera<br>
 	 * @param p el paciente a ingresar
 	 * */
 	public void addListaEspera(Paciente p) 
 	{
+		assert pacientes.containsKey(p.getDni()) : "Paciente debe estar registrado";
+		assert listaEspera != null : "La lista de espera no estÃ¡ inicializada";
+		
+		int tamAntes = listaEspera.size();
 		this.listaEspera.add(p);
+		
+		assert listaEspera.size() == tamAntes + 1 : "No se aÃ±adiÃ³ paciente a lista de espera";
 	}
 	/**
 	 * Remueve a un paciente de la lista de espera
-	 * <b>pre: </b>la lista de pacientes está inicializada y el paciente está en ella<br>
-	 * <b>post:</b> el paciente ya no está en la lista de espera<br>
+	 * <b>pre: </b>la lista de espera estï¿½ inicializada y el paciente estï¿½ en ella<br>
+	 * <b>post:</b> el paciente ya no estï¿½ en la lista de espera<br>
 	 * @param p el paciente a remover
 	 * */
 	public void removeListaEspera(Paciente p) 
 	{
+		assert listaEspera != null : "La lista de espera no estÃ¡ inicializada";
+		assert listaEspera.contains(p) : "Paciente no estaba en lista de espera";
+		
 		this.listaEspera.remove(p);
+		
+		assert !listaEspera.contains(p) : "Paciente no fue removido correctamente";
 	}
 	/**
 	 * Mueve un paciente al patio
-	 * <b>pre:</b> la lista está inicializada, el paciente existe y está en el patio<br>
-	 * <b>post:</b> el paciente está en el patio<br>
+	 * <b>pre:</b> la lista estï¿½ inicializada y el paciente existe<br>
+	 * <b>post:</b> el paciente estï¿½ en el patio<br>
 	 * @param p el paciente a mover
 	 * */
 	public void addPatio(IPrioridad p) 
 	{
+		assert this.patio != null : "La lista del patio no estÃ¡ inicializada";
+		assert p != null: "Paciente no existe";
+		
 		this.patio.add(p);
+		
+		assert patio.contains(p) : "El paciente no quedÃ³ en el patio";
 	}
 	/**
 	 * Remueve a un paciente del patio
-	 * <b>pre:</b> el paciente existe y está en el patio <br>
-	 * <b>post:</b> el paciente ya no está en el patio <br>
+	 * <b>pre:</b> el paciente existe y estï¿½ en el patio <br>
+	 * <b>post:</b> el paciente ya no estï¿½ en el patio <br>
 	 * @param p el paciente a remover
 	 * */
 	public void removePatio(IPrioridad p) 
 	{
+		assert patio.contains(p) : "El paciente no estÃ¡ en el patio";
+		
 		this.patio.remove(p);
+		
+		assert !patio.contains(p) : "El paciente no fue removido del patio correctamente";
 	}
 	/**
-	 * Añade un paciente a la lista de los que están siendo atendidos
-	 * <b>pre:</b> la lista de atención está inicializada, el paciente existe y no está siendo atendido <br>
-	 * <b>post:</b> el paciente está siendo atendido <br>
-	 * @param p el paciente a añadir
+	 * Aï¿½ade un paciente a la lista de los que estï¿½n siendo atendidos
+	 * <b>pre:</b> la lista de atenciï¿½n estï¿½ inicializada, el paciente existe y no estï¿½ siendo atendido <br>
+	 * <b>post:</b> el paciente estï¿½ siendo atendido <br>
+	 * @param p el paciente a aï¿½adir
 	 * */
 	public void addListaEnAtencion(Paciente p) 
 	{
+		assert this.listaEnAtencion != null : "La lista \"en atenciÃ³n\" no estÃ¡ inicializada";
+		assert p != null : "El paciente no existe";
+		
 		this.listaEnAtencion.add(p);
+		
+		assert this.listaEnAtencion.contains(p) : "El paciente no fue aÃ±adido a la lista de atenciÃ³n correctamente";
 	}
 	/**
-	 * Remueve un paciente de la lista de los que están siendo atendidos
-	 * <b>pre: la lista está inicializada, el paciente existe y está en la lista</b><br>
-	 * <b>post:el paciente ya no está siento atendido</b><br>
+	 * Remueve un paciente de la lista de los que estï¿½n siendo atendidos
+	 * <b>pre: la lista estï¿½ inicializada, el paciente existe y estï¿½ en la lista</b><br>
+	 * <b>post:el paciente ya no estï¿½ siento atendido</b><br>
 	 * @param p el paciente a remover
 	 * */
 	public void removeListaEnAtencion(Paciente p) 
 	{
+		assert this.listaEnAtencion != null : "La lista \"en atenciÃ³n\" no estÃ¡ inicializada";
+		assert p != null : "El paciente no existe";
+		assert this.listaEnAtencion.contains(p) : "El paciente no estÃ¡ en la lista de atenciÃ³n";
+		
 		this.listaEnAtencion.remove(p);
+		
+		assert !listaEnAtencion.contains(p) : "El paciente no fue eliminado de la lista de atenciÃ³n correctamente";
 	}
 	/**
-	 * Registra el ingreso de un paciente a la clínica.
+	 * Registra el ingreso de un paciente a la clï¿½nica.
 	 * <p>
-	 * Este método agrega al paciente a la lista de espera, y gestiona su ubicación
-	 * inicial en la sala de espera o en el patio, según la disponibilidad y prioridad.
+	 * Este mï¿½todo agrega al paciente a la lista de espera, y gestiona su ubicaciï¿½n
+	 * inicial en la sala de espera o en el patio, segï¿½n la disponibilidad y prioridad.
 	 * </p>
 	 *
 	 * <p>
-	 * Si la sala de espera está vacía, el paciente la ocupa. Si ya hay un paciente en
+	 * Si la sala de espera estï¿½ vacï¿½a, el paciente la ocupa. Si ya hay un paciente en
 	 * la sala, se compara la prioridad entre ambos:
 	 * </p>
 	 * 
 	 * <ul>
 	 *   <li>Si el nuevo paciente tiene mayor prioridad, se mueve al paciente actual al patio
 	 *       y el nuevo paciente ocupa la sala.</li>
-	 *   <li>Si el nuevo paciente tiene menor prioridad, se lo envía directamente al patio.</li>
+	 *   <li>Si el nuevo paciente tiene menor prioridad, se lo envï¿½a directamente al patio.</li>
 	 * </ul><br>
-	 *<b>pre:</b> la lista de espera está inicializada, al igual que la sala de espera y el patio<br>
-	 * <b>post: </b>el paciente está en la sala de espera o el patio según corresponda (y otro paciente en la sala/patio si el nuevo tomó prioridad)<br>
-	 * @param p el {@link Paciente} que ingresa a la clínica
-	 * @throws PacienteNotFoundException si el paciente no está registrado en el sistema
+	 *<b>pre:</b> la lista de espera estï¿½ inicializada, al igual que la sala de espera y el patio<br>
+	 * <b>post: </b>el paciente estï¿½ en la sala de espera o el patio segï¿½n corresponda (y otro paciente en la sala/patio si el nuevo tomï¿½ prioridad)<br>
+	 * @param p el {@link Paciente} que ingresa a la clï¿½nica
+	 * @throws PacienteNotFoundException si el paciente no estï¿½ registrado en el sistema
 	 */
 	public void ingresaPaciente(Paciente p) throws PacienteNotFoundException 
 	{
+		assert listaEspera != null : "La lista de espera no estÃ¡ inicializada";
+		assert salaEspera != null : "La sala de espera no estÃ¡ inicializada";
+		assert patio != null : "El patio no estÃ¡ inicializado";
+		
 		if (!pacientes.containsKey(p.getDni()))
 			throw new PacienteNotFoundException("Paciente no registrado");
 
@@ -192,26 +240,34 @@ public class SingletonClinica
 			salaEspera.ocuparSala(p);
 		} else
 			addPatio(p);
+		
+		assert listaEspera.contains(p) : "El paciente no quedÃ³ en la lista de espera";
+		assert salaEspera.getPaciente().equals(p) || patio.contains(p) : "El paciente no estÃ¡ en su lugar de espera correspondiente";
 	}
 	/**<b>pre: </b><br>
 	 * <b>post:</b><br>
-	 * Atiende a un paciente de la clínica.
+	 * Atiende a un paciente de la clï¿½nica.
 	 * <p>
-	 * Si está en la lista de espera lo remueve y se fija si está en el patio o en la sala de espera.
+	 * Si estï¿½ en la lista de espera lo remueve y se fija si estï¿½ en el patio o en la sala de espera.
 	 * </p>
 	 *<ul>
-	 *   <li>Si está en el patio lo remueve de ahí.</li>
-	 *   <li>Si está en la sala de espera lo saca de ahí y mueve a un paciente del patio a la sala.</li>
+	 *   <li>Si estï¿½ en el patio lo remueve de ahï¿½.</li>
+	 *   <li>Si estï¿½ en la sala de espera lo saca de ahï¿½ y mueve a un paciente del patio a la sala.</li>
 	 *</ul><br>
-	 *<b>pre: </b>lista de espera, patio y sala de espera inicializados, el médico está registrado, consultarPorMedico y consultarPorPaciente inicializadas<br>
-	 * <b>post:</b> El paciente está en la lista de atención, lo remueve de la sala o del patio y las listas de consultas registraron ambas registraron su consulta<br>
-	 *@param m El médico que atenderá al paciente
+	 *<b>pre: </b>lista de espera, patio y sala de espera inicializados, el mï¿½dico estï¿½ registrado, consultarPorMedico y consultarPorPaciente inicializadas<br>
+	 * <b>post:</b> El paciente estï¿½ en la lista de atenciï¿½n, lo remueve de la sala o del patio y las listas de consultas registraron ambas registraron su consulta<br>
+	 *@param m El mï¿½dico que atenderï¿½ al paciente
 	 *@param p El paciente a atender.
 	 *
-	 *@throws PacienteNotFoundException si el paciente no está registrado en el sistema indicando  que el paciente no está registrado
+	 *@throws PacienteNotFoundException si el paciente no estï¿½ registrado en el sistema indicando  que el paciente no estï¿½ registrado
 	 * */
 	public void atiendePaciente(IMedico m, Paciente p) throws PacienteNotFoundException 
 	{
+		assert listaEspera != null : "La lista de espera no estÃ¡ inicializada";
+		assert salaEspera != null : "La sala de espera no estÃ¡ inicializada";
+		assert patio != null : "El patio no estÃ¡ inicializado";
+		assert medicos.containsKey(m.getDni()) : "El mÃ©dico no estÃ¡ registrado";
+		
 		if (!pacientes.containsKey(p.getDni()))
 			throw new PacienteNotFoundException("Paciente no registrado");
 
@@ -247,27 +303,35 @@ public class SingletonClinica
 	        consultasPorMedico.put(m, new ArrayList<>());
 	    }
 	    consultasPorMedico.get(m).add(c);
+	    
+	    assert listaEnAtencion.contains(p) : "El paciente no quedÃ³ registrado en la lista \"en atenciÃ³n\"";
+	    assert !(salaEspera.getPaciente().equals(p) || patio.contains(p)) : "El paciente no fue eliminado de su lugar de espera correspondiente";
+	    assert consultasPorPaciente.get(p).contains(c) : "La consulta no fue registrada correctamente en el paciente";
+	    assert consultasPorMedico.get(m).contains(c) : "La consulta no fue registrada correctamente en el mÃ©dico";
 
 	}
 	/**
-	 * Gestiona el egreso de un paciente de la clínica y genera la factura correspondiente.
+	 * Gestiona el egreso de un paciente de la clï¿½nica y genera la factura correspondiente.
 	 * <p>
-	 * Este método obtiene la habitación (si el paciente estuvo internado) y todas las consultas
-	 * realizadas durante su estadía, crea una factura con esa información, y remueve al paciente de todas las listas
+	 * Este mï¿½todo obtiene la habitaciï¿½n (si el paciente estuvo internado) y todas las consultas
+	 * realizadas durante su estadï¿½a, crea una factura con esa informaciï¿½n, y remueve al paciente de todas las listas
 	 * salvo la de pacientes.
 	 * </p>
 	 *
 	 * <p>
-	 * Al finalizar, el paciente es removido de las listas de atención e internación,
+	 * Al finalizar, el paciente es removido de las listas de atenciï¿½n e internaciï¿½n,
 	 * y su fecha de ingreso se restablece a null para permitir futuros ingresos.
 	 * </p>
-	 *<b>pre: </b>la lista de internados está inicializada al igual que la de internados y la lista de pacientes en atención<br>
-	 * <b>post:</b> el paciente ya no está en la lista de internados ni en la de atención, su consulta no está más en la lista y la fecha de ingreso es nula<br>
-	 * @param p el paciente que egresa de la clínica
+	 *<b>pre: </b>la lista de internados estï¿½ inicializada al igual que la lista de pacientes en atenciÃ³n<br>
+	 * <b>post:</b> el paciente ya no estï¿½ en la lista de internados ni en la de atenciï¿½n, su consulta no estï¿½ mï¿½s en la lista y la fecha de ingreso es nula<br>
+	 * @param p el paciente que egresa de la clï¿½nica
 	 * @return la factura que se le cobra al paciente
 	 **/
 	public Factura egresaPaciente(Paciente p) 
 	{
+		assert internados != null : "Lista internados no inicializada";
+		assert listaEnAtencion != null : "Lista internados no inicializada";
+		
 		IHabitacion h = internados.get(p); // si no fue internado retorna null
 		ArrayList<Consulta> consultasPaciente = consultasPorPaciente.get(p);
 		
@@ -278,38 +342,45 @@ public class SingletonClinica
 		removeListaEnAtencion(p);
 		p.setFechaIngreso(null);  // para que si vuelve a atenderse se renueve la fecha
 		
+		assert !internados.containsKey(p) : "El paciente no fue eliminado de la lista de internados correctamente";
+		assert !listaEnAtencion.contains(p) : "El paciente no fue eliminado de la \"en atenciÃ³n\" de internados correctamente";
+		
 		return f;
 	}
 	
 	/**
-	 * Añade al paciente a la lista de internados con la habitación correspondiente
-	 * <b>pre: </b>la lista de internados está inicializada<br>
-	 * <b>post: </b>el paciente está en la lista de internados<br>
+	 * Aï¿½ade al paciente a la lista de internados con la habitaciï¿½n correspondiente
+	 * <b>pre: </b>la lista de internados estï¿½ inicializada<br>
+	 * <b>post: </b>el paciente estï¿½ en la lista de internados<br>
 	 * @param paciente el paciente a internar
-	 * @param habitacion la habitacion donde será internado
-	 * @throws PacienteNotFoundException si el paciente no está registrado en el sistema indicando que el paciente no está registrado
+	 * @param habitacion la habitacion donde serï¿½ internado
+	 * @throws PacienteNotFoundException si el paciente no estï¿½ registrado en el sistema indicando que el paciente no estï¿½ registrado
 	 */
 	public void internaPaciente(Paciente paciente, IHabitacion habitacion) throws PacienteNotFoundException 
 	{
+		assert habitacion != null : "HabitaciÃ³n inexistente";
+		
 		if (!pacientes.containsKey(paciente.getDni()))
 			throw new PacienteNotFoundException("Paciente no registrado");
 		internados.put(paciente, habitacion);
+		
+		assert internados.containsKey(paciente) : "Paciente no internado correctamente";
 	}
 	/**+
-	 * Crea a un médico con sus datos esenciales incluyendo posgrado y contratación
-	 * <b>pre: </b>la fábrica de médicos está inicializada<br>
-	 * <b>post: </b>el médico fué creado con la contratación y el posgrado correspondientes<br>
+	 * Crea a un mï¿½dico con sus datos esenciales incluyendo posgrado y contrataciï¿½n
+	 * <b>pre: </b>la fï¿½brica de mï¿½dicos estï¿½ inicializada<br>
+	 * <b>post: </b>el mï¿½dico fuï¿½ creado con la contrataciï¿½n y el posgrado correspondientes<br>
 	 * @param dni 
 	 * @param nya nombre y apellido
 	 * @param ciudad
 	 * @param telefono
 	 * @param calle Calle del domicilio
 	 * @param altura Altura del domicilio
-	 * @param nroMat Número de matrícula
+	 * @param nroMat Nï¿½mero de matrï¿½cula
 	 * @param especialidad
 	 * @param contratacion
 	 * @param posgrado
-	 * @return una instancia IMedico habiendo añadido su contratacion y posgrado
+	 * @return una instancia IMedico habiendo aï¿½adido su contratacion y posgrado
 	 */
 	public IMedico crearMedico(String dni, String nya, String ciudad, String telefono, String calle, int altura,
 			int nroMat, String especialidad, String contratacion, String posgrado) 
@@ -327,19 +398,19 @@ public class SingletonClinica
 	}
 
 	/**+
-	 * Crea a un médico con sus datos esenciales sin incluir posgrado
-	 * <b>pre: </b>la fábrica de médicos está inicializada<br>
-	 * <b>post: </b>el médico fué creado con la contratación correspondiente<br>
+	 * Crea a un mï¿½dico con sus datos esenciales sin incluir posgrado
+	 * <b>pre: </b>la fï¿½brica de mï¿½dicos estï¿½ inicializada<br>
+	 * <b>post: </b>el mï¿½dico fuï¿½ creado con la contrataciï¿½n correspondiente<br>
 	 * @param dni 
 	 * @param nya nombre y apellido
 	 * @param ciudad
 	 * @param telefono
 	 * @param calle Calle del domicilio
 	 * @param altura Altura del domicilio
-	 * @param nroMat Número de matrícula
+	 * @param nroMat Nï¿½mero de matrï¿½cula
 	 * @param especialidad
 	 * @param contratacion
-	 * @return una instancia IMedico habiendo añadido su contratacion
+	 * @return una instancia IMedico habiendo aï¿½adido su contratacion
 	 */
 	public IMedico crearMedico(String dni, String nya, String ciudad, String telefono, String calle, int altura,
 			int nroMat, String especialidad, String contratacion) 
@@ -359,16 +430,16 @@ public class SingletonClinica
 
 	// medico base (no posgrado, no no contrataciÃ³n)
 	/**+
-	 * Crea a un médico con sus datos esenciales sin incluir posgrado ni contratacion
-	 * <b>pre: </b>la fábrica de médicos está inicializada<br>
-	 *<b>post: </b>el médico fué creado sin contratación ni posgrado<br>
+	 * Crea a un mï¿½dico con sus datos esenciales sin incluir posgrado ni contratacion
+	 * <b>pre: </b>la fï¿½brica de mï¿½dicos estï¿½ inicializada<br>
+	 *<b>post: </b>el mï¿½dico fuï¿½ creado sin contrataciï¿½n ni posgrado<br>
 	 * @param dni 
 	 * @param nya nombre y apellido
 	 * @param ciudad
 	 * @param telefono
 	 * @param calle Calle del domicilio
 	 * @param altura Altura del domicilio
-	 * @param nroMat Número de matrícula
+	 * @param nroMat Nï¿½mero de matrï¿½cula
 	 * @param especialidad
 	 * @return una instancia IMedico sin contratacion o posgrado
 	 */
@@ -387,17 +458,17 @@ public class SingletonClinica
 		}
 	}
 	/**
-	 * Crea un paciente con dni, número de historia clínica, nombre y apellido, rango etario, teléfono, domicilio, ciudad
-	 *<b>pre: </b>la fábrica de pacientes está inicializada<br>
-	 *<b>post: </b>el paciente fué creado con sus datos correspondientes<br>
+	 * Crea un paciente con dni, nï¿½mero de historia clï¿½nica, nombre y apellido, rango etario, telï¿½fono, domicilio, ciudad
+	 *<b>pre: </b>la fï¿½brica de pacientes estï¿½ inicializada<br>
+	 *<b>post: </b>el paciente fuï¿½ creado con sus datos correspondientes<br>
 	 * @param dni
 	 * @param nya nombre y apellido
 	 * @param ciudad
 	 * @param telefono
 	 * @param calle
 	 * @param altura
-	 * @param nroHC número de historia clínica
-	 * @param rangoEtario niño, joven o mayor
+	 * @param nroHC nï¿½mero de historia clï¿½nica
+	 * @param rangoEtario niï¿½o, joven o mayor
 	 * @return la instancia del paciente creado
 	 */
 	public Paciente crearPaciente(String dni, String nya, String ciudad, String telefono, String calle, int altura,
@@ -407,10 +478,10 @@ public class SingletonClinica
 		return p;
 	}
 	/**
-	 * Crea una nueva habitación
-	 *<b>pre:</b> la fábrica de habitaciones está inicializada<br>
-	 *<b>post:</b> la habitación fué creada con el tipo correspondiente<br>
-	 * @param tipo tipo de habitación
+	 * Crea una nueva habitaciï¿½n
+	 *<b>pre:</b> la fï¿½brica de habitaciones estï¿½ inicializada<br>
+	 *<b>post:</b> la habitaciï¿½n fuï¿½ creada con el tipo correspondiente<br>
+	 * @param tipo tipo de habitaciï¿½n
 	 * @return una instancia de IHabitacion del tipo solicitado
 	 */
 	public IHabitacion crearHabitacion(String tipo) 
@@ -419,17 +490,20 @@ public class SingletonClinica
 		return h;
 	}
 	/**
-	 * Retorna un reporte de consultas del médico por día enumerando los pacientes en el período de tiempo indicado
-	 * <p>Muestra de forma cronológica las consultas con el nombre del paciente</p>
-	 *<b>pre: </b>la lista consultarPorMedico fué inicializada<br>
-	 *<b>post: </b>se generó un reporte en base a la lista de consultas correspondiente<br>
-	 * @param medico El médico del que se quiere generar un reporte
+	 * Retorna un reporte de consultas del mï¿½dico por dï¿½a enumerando los pacientes en el perï¿½odo de tiempo indicado
+	 * <p>Muestra de forma cronolï¿½gica las consultas con el nombre del paciente</p>
+	 *<b>pre: </b>la lista consultarPorMedico fuï¿½ inicializada<br>
+	 *<b>post: </b>se generï¿½ un reporte en base a la lista de consultas correspondiente<br>
+	 * @param medico El mï¿½dico del que se quiere generar un reporte
 	 * @param fechaInicio inicio del periodo
 	 * @param fechaFin fin del periodo
 	 * @return un reporte generado en base al periodo indicado
 	 * */
 	public Reporte generarReporte(IMedico medico, LocalDate fechaInicio, LocalDate fechaFin) throws MedicoNotRegisteredException 
 	{
+		assert medico != null : "MÃ©dico es null";
+		assert fechaInicio != null && fechaFin != null : "Alguna de las fechas invÃ¡lidas";
+		
 	    if (!medicos.containsKey(medico.getDni())) 
 	    {
 	        throw new MedicoNotRegisteredException("El medico no esta registrado en la clinica.");
