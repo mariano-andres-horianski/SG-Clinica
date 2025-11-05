@@ -1,6 +1,6 @@
 package clinica.ambulancia;
 
-public class AmbulanciaAtendiendoADomicilioState implements AmbulanciaState{
+public class AmbulanciaAtendiendoADomicilioState implements IAmbulanciaState{
 	private Ambulancia ambulancia;
 
 	public AmbulanciaAtendiendoADomicilioState(Ambulancia ambulancia) {
@@ -14,7 +14,7 @@ public class AmbulanciaAtendiendoADomicilioState implements AmbulanciaState{
 
 	@Override
 	public void trasladoAClinica() {
-		System.out.println("AMBULANCIA OCUPADA: La ambulancia está atendiendo a domicilio");
+		System.out.println("AMBULANCIA OCUPADA: La ambulancia estï¿½ atendiendo a domicilio");
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class AmbulanciaAtendiendoADomicilioState implements AmbulanciaState{
 
 	@Override
 	public void mantenimiento() {
-		System.out.println("AMBULANCIA OCUPADA: La ambulancia está atendiendo a domicilio");
+		System.out.println("AMBULANCIA OCUPADA: La ambulancia estï¿½ atendiendo a domicilio");
 	}
 
 }

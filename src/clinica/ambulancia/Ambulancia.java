@@ -1,7 +1,7 @@
 package clinica.ambulancia;
 
 public class Ambulancia {
-	private AmbulanciaState estado;
+	private IAmbulanciaState estado;
 	
 	public Ambulancia() {
 		this.estado = new AmbulanciaDisponibleState(this);
@@ -20,7 +20,7 @@ public class Ambulancia {
 		this.estado.mantenimiento();
 	}
 
-	public void setEstado(AmbulanciaState estado) {
+	public void setEstado(IAmbulanciaState estado) {
 		this.estado = estado;
 	}
 	

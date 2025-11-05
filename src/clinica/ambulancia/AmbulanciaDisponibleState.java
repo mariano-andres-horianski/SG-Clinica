@@ -1,6 +1,6 @@
 package clinica.ambulancia;
 
-public class AmbulanciaDisponibleState implements AmbulanciaState{
+public class AmbulanciaDisponibleState implements IAmbulanciaState{
 	private Ambulancia ambulancia;
 
 	public AmbulanciaDisponibleState(Ambulancia ambulancia) {

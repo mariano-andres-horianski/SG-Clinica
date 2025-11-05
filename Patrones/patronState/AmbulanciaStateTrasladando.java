@@ -21,7 +21,7 @@ public class AmbulanciaStateTrasladando implements IAmbulanciaState {
 
 	@Override
 	public void retornoAutomatico() {
-
+		ambulancia.setEstado(new AmbulanciaStateDisponible(ambulancia));
 	}
 
 	@Override

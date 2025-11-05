@@ -2,19 +2,21 @@ package clinica;
 
 import java.time.LocalDate;
 
+import clinica.exceptions.AsociadoDuplicadoException;
 import clinica.exceptions.MedicoNotRegisteredException;
 import clinica.exceptions.PacienteNotFoundException;
 import clinica.habitaciones.IHabitacion;
+import clinica.model.Asociado;
 import clinica.model.Factura;
 import clinica.model.IMedico;
 import clinica.model.Paciente;
 import clinica.model.Reporte;
+import negocio.*;
 
 public class Main 
 {
 	public static void main(String[] args) 
 	{
-
 		try 
 		{
 			// ----------------- Inicializo clínica -----------------
@@ -71,6 +73,36 @@ public class Main
 			Reporte reporte2 = clinica.generarReporte(medico2, desde, hasta);
 			System.out.println(reporte2);
 			
+			// PRUEBAS ASOCIADO + AMBULANCIA
+			Asociado a1 = clinica.crearAsociado("777", "David", "Miramar", "223333333", "Av. Libertador", 25, 5);
+			Asociado a2 = clinica.crearAsociado("888", "Martin", "Miramar", "223333333", "Av. Libertador", 25, 7);
+			Asociado a3 = clinica.crearAsociado("999", "Gian", "Miramar", "223333333", "Av. Libertador", 25, 3);
+			Asociado a4 = clinica.crearAsociado("101", "Kevin", "Miramar", "223333333", "Av. Libertador", 25, 4);
+			
+			try {
+				clinica.registrarAsociado(a1);
+				clinica.registrarAsociado(a2);
+				clinica.registrarAsociado(a3);
+				clinica.registrarAsociado(a4);
+			} catch (AsociadoDuplicadoException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(clinica.mostrarAsociados());
+			
+			Thread ta = new Thread(new RetornoAutomatico(clinica.getAmbulancia()));
+			Thread t1 = new Thread(a1);
+			Thread t2 = new Thread(a2);
+			Thread t3 = new Thread(a3);
+			Thread t4 = new Thread(a4);
+			
+			System.out.println("============= SIMULACION =============");
+			
+			t1.start();
+			t2.start();
+			t3.start();
+			t4.start();
+			ta.start();
 		} 
 		catch (PacienteNotFoundException | MedicoNotRegisteredException e) 
 		{

@@ -75,6 +75,8 @@ public class Ambulancia {
 
 	private void informar(String s) {
 		// a implementar, informa por vista la razón
+		// implementación temporal
+		System.out.println("AMBULANCIA OCUPADA: " + s);
 	}
 
 	public IAmbulanciaState getEstado() {

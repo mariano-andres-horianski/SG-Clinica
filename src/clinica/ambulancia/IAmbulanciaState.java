@@ -1,6 +1,6 @@
 package clinica.ambulancia;
 
-public interface AmbulanciaState {
+public interface IAmbulanciaState {
 	public void atencionADomicilio();
 	public void trasladoAClinica();
 	public void retornoAClinica();
