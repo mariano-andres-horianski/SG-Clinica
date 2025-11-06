@@ -74,10 +74,10 @@ public class Main
 			System.out.println(reporte2);
 			
 			// PRUEBAS ASOCIADO + AMBULANCIA
-			Asociado a1 = clinica.crearAsociado("777", "David", "Miramar", "223333333", "Av. Libertador", 25, 5);
-			Asociado a2 = clinica.crearAsociado("888", "Martin", "Miramar", "223333333", "Av. Libertador", 25, 7);
-			Asociado a3 = clinica.crearAsociado("999", "Gian", "Miramar", "223333333", "Av. Libertador", 25, 3);
-			Asociado a4 = clinica.crearAsociado("101", "Kevin", "Miramar", "223333333", "Av. Libertador", 25, 4);
+			Asociado a1 = clinica.crearAsociado("777", "David", "Miramar", "223333333", "Av. Libertador", 25);
+			Asociado a2 = clinica.crearAsociado("888", "Martin", "Miramar", "223333333", "Av. Libertador", 25);
+			Asociado a3 = clinica.crearAsociado("999", "Gian", "Miramar", "223333333", "Av. Libertador", 25);
+			Asociado a4 = clinica.crearAsociado("101", "Kevin", "Miramar", "223333333", "Av. Libertador", 25);
 			
 			try {
 				clinica.registrarAsociado(a1);

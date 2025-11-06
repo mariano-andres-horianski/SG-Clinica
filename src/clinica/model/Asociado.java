@@ -5,23 +5,23 @@ import java.util.Random;
 import clinica.SingletonClinica;
 
 public class Asociado extends Persona implements Runnable {
-	private int solicitudes;
+	private boolean simulacionActiva;
 	private Random random = new Random();
 
-	public Asociado(String dni, String nya, String ciudad, String telefono, Domicilio domicilio, int solicitudes) {
+	public Asociado(String dni, String nya, String ciudad, String telefono, Domicilio domicilio) {
 		super(dni, nya, ciudad, telefono, domicilio);
-		this.solicitudes = solicitudes;
+		this.simulacionActiva = true;
 	}
 
-	public int getSolicitudes() {
-		return solicitudes;
+	public boolean setSimulacionActiva() {
+		return simulacionActiva;
 	}
 
 	@Override
     public void run() {
         SingletonClinica clinica = SingletonClinica.getInstance();
 
-        for (int i = 0; i < solicitudes; i++) {
+        while (simulacionActiva) {
 
             int accion = random.nextInt(2); 
             // 0 = atención domicilio

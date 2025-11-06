@@ -17,11 +17,11 @@ public class AsociadoFactory
 	 * @param solicitudes Cantidad de solicitudes para ambulancia
 	 * @return la instancia del Paciente creado
 	 */
-    public Asociado crearAsociado(String dni, String nya, String ciudad, String telefono, String calle, int altura, int solicitudes) 
+    public Asociado crearAsociado(String dni, String nya, String ciudad, String telefono, String calle, int altura) 
     {
     	
     	Domicilio domicilio = new Domicilio(calle, altura);
     	
-        return new Asociado(dni, nya, ciudad, telefono, domicilio, solicitudes);
+        return new Asociado(dni, nya, ciudad, telefono, domicilio);
     }
 }

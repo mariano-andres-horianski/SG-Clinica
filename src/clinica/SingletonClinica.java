@@ -588,9 +588,8 @@ public class SingletonClinica {
 	 * @param solicitudes Cantidad de solicitudes
 	 * @return la instancia del asociado creado
 	 */
-	public Asociado crearAsociado(String dni, String nya, String ciudad, String telefono, String calle, int altura,
-			int solicitudes) {
-		Asociado a = asociadoFactory.crearAsociado(dni, nya, ciudad, telefono, calle, altura, solicitudes);
+	public Asociado crearAsociado(String dni, String nya, String ciudad, String telefono, String calle, int altura) {
+		Asociado a = asociadoFactory.crearAsociado(dni, nya, ciudad, telefono, calle, altura);
 		return a;
 	}
 
