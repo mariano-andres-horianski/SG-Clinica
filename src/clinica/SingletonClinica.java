@@ -55,6 +55,9 @@ public class SingletonClinica {
 	
 	/** Operario */
 	private Operario operario;
+	
+	/** Simulacion activa */
+	private boolean simulacionActiva;
 
 	private SingletonClinica() {
 		ciudad = "Mar del Plata";
@@ -83,6 +86,7 @@ public class SingletonClinica {
 		
 		ambulancia = new Ambulancia();
 		operario = new Operario(this);
+		simulacionActiva = true;
 	}
 
 	public static SingletonClinica getInstance() {
@@ -665,7 +669,14 @@ public class SingletonClinica {
 	public Operario getOperario() {
 		return operario;
 	}
-	
+
+	public boolean isSimulacionActiva() {
+		return simulacionActiva;
+	}
+
+	public void setSimulacionActiva(boolean simulacionActiva) {
+		this.simulacionActiva = simulacionActiva;
+	}
 	
 
 }
