@@ -1,4 +1,4 @@
-package clinica.exceptions;
+package excepciones;
 /**
  * Excepci�n lanzada cuando se intenta registrar un asociado duplicado
  */

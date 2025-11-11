@@ -2,15 +2,14 @@ package clinica;
 
 import java.time.LocalDate;
 
-import clinica.exceptions.AsociadoDuplicadoException;
 import clinica.exceptions.MedicoNotRegisteredException;
 import clinica.exceptions.PacienteNotFoundException;
 import clinica.habitaciones.IHabitacion;
-import clinica.model.Asociado;
 import clinica.model.Factura;
 import clinica.model.IMedico;
 import clinica.model.Paciente;
 import clinica.model.Reporte;
+import excepciones.AsociadoDuplicadoException;
 import negocio.*;
 
 public class Main 

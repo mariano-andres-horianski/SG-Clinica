@@ -1,4 +1,4 @@
-package clinica.model;
+package negocio;
 
 import clinica.SingletonClinica;
 

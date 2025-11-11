@@ -1,8 +1,10 @@
-package clinica.model;
+package negocio;
 
 import java.util.Random;
 
 import clinica.SingletonClinica;
+import clinica.model.Domicilio;
+import clinica.model.Persona;
 
 public class Asociado extends Persona implements Runnable {
 	private SingletonClinica clinica;

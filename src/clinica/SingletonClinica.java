@@ -5,7 +5,11 @@ import clinica.d.dispatch.*;
 import clinica.habitaciones.*;
 import clinica.factories.*;
 import clinica.model.*;
+import excepciones.AsociadoDuplicadoException;
+import excepciones.AsociadoNotFoundException;
 import negocio.Ambulancia;
+import negocio.Asociado;
+import negocio.Operario;
 
 import java.util.HashMap;
 import java.time.LocalDate;

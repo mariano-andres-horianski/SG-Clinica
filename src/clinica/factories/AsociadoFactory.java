@@ -1,5 +1,6 @@
 package clinica.factories;
 import clinica.model.*;
+import negocio.Asociado;
 /**
  * F�brica responsable de la creacion de instancias de Asociado
  *
