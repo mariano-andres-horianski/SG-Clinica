@@ -34,27 +34,53 @@ public class FormularioUpdateAsociado extends JDialog {
         add(txtNya);
         add(new JLabel("Ciudad:"));
         add(txtCiudad);
-        add(new JLabel("Teléfono:"));
+        add(new JLabel("Telï¿½fono:"));
         add(txtTelefono);
         add(new JLabel("Domicilio:"));
         add(txtDomicilio);
         add(btnGuardar);
         add(btnCancelar);
 
-        // Acción del botón guardar
+        // Accion del boton guardar
         btnGuardar.addActionListener(e -> {
             socio.setNya(txtNya.getText());
             socio.setCiudad(txtCiudad.getText());
             socio.setTelefono(txtTelefono.getText());
             socio.setDomicilioStr(txtDomicilio.getText());
-
-            // Podés agregar aquí una llamada a tu controlador o DAO:
-            // controlador.actualizarAsociado(socio);
-
             JOptionPane.showMessageDialog(this, "Datos actualizados correctamente.");
             dispose();
         });
 
         btnCancelar.addActionListener(e -> dispose());
     }
+
+	public JTextField getTxtDni() {
+		return txtDni;
+	}
+
+	public JTextField getTxtNya() {
+		return txtNya;
+	}
+
+	public JTextField getTxtCiudad() {
+		return txtCiudad;
+	}
+
+	public JTextField getTxtTelefono() {
+		return txtTelefono;
+	}
+
+	public JTextField getTxtDomicilio() {
+		return txtDomicilio;
+	}
+
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+    
+    
 }

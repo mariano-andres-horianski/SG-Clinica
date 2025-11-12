@@ -51,14 +51,12 @@ public class VentanaPrincipal extends JFrame {
 	private JButton boton_navegacionInicio;
 	private JButton boton_navegacionPacientes;
 	private JButton boton_navegacionAtencion;
-	private JButton btnAgregarAsociado;
 	private JButton btnAgregarPaciente;
 	private JButton btnFacturacion;
 	private JPanel panel_Central;
 
 	/**
 	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -72,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 
+	 */
 	public JPanel getPanel_Central() {
 		return panel_Central;
 	}
@@ -213,14 +212,6 @@ public class VentanaPrincipal extends JFrame {
 		JPanel panel_3 = new JPanel();
 		toolBar.add(panel_3);
 		
-		btnAgregarAsociado = new JButton(" + Agregar Asociado");
-		panel_3.add(btnAgregarAsociado);
-		
-		btnAgregarAsociado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		JPanel panel_4 = new JPanel();
 		toolBar.add(panel_4);
 		
@@ -240,10 +231,6 @@ public class VentanaPrincipal extends JFrame {
 		panel_Navegacion.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		boton_navegacionInicio = new JButton("Inicio");
-		boton_navegacionInicio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		panel_Navegacion.add(boton_navegacionInicio);
 		
 		boton_navegacionAsociados = new JButton("Asociados");
@@ -251,10 +238,6 @@ public class VentanaPrincipal extends JFrame {
 		panel_Navegacion.add(boton_navegacionAsociados);
 		
 		boton_navegacionPacientes = new JButton("Pacientes");
-		boton_navegacionPacientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		panel_Navegacion.add(boton_navegacionPacientes);
 		
 		boton_navegacionAtencion = new JButton("Atencion");
@@ -274,4 +257,41 @@ public class VentanaPrincipal extends JFrame {
 	public void setControladorAsociados(ActionListenerAsociados controladorAsociados) {
 		this.controladorAsociados = controladorAsociados;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public ActionListenerAsociados getControladorAsociados() {
+		return controladorAsociados;
+	}
+
+	public JButton getBoton_navegacionAsociados() {
+		return boton_navegacionAsociados;
+	}
+
+	public JButton getBoton_navegacionInicio() {
+		return boton_navegacionInicio;
+	}
+
+	public JButton getBoton_navegacionPacientes() {
+		return boton_navegacionPacientes;
+	}
+
+	public JButton getBoton_navegacionAtencion() {
+		return boton_navegacionAtencion;
+	}
+	public JButton getBtnAgregarPaciente() {
+		return btnAgregarPaciente;
+	}
+
+	public JButton getBtnFacturacion() {
+		return btnFacturacion;
+	}
+	
+	
 }

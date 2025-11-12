@@ -11,22 +11,22 @@ public class BDConexion {
     private Connection conn;
     private Statement sentencia;
 
-    private String baseDatos = "jdbc:mysql://localhost:3306/Grupo_8";
+    private String baseDatos = "jdbc:mariadb://localhost:3308/Grupo_8";
     private String usuario = "progra_c";
     private String password = "progra_c";
     
     /**
-     * Constructor privado que inicializa la conexión y la sentencia.
+     * Constructor privado que inicializa la conexiï¿½n y la sentencia.
      * 
-     * <p><b>Precondición:</b> El driver JDBC de MySQL debe estar disponible en el classpath. </p>
-     * <p><b>Postcondición:</b> Si no ocurre una excepción, conn y sentencia se inicializan correctamente 
-     * y la conexión queda en modo auto-commit. </p>
+     * <p><b>Precondiciï¿½n:</b> El driver JDBC de MySQL debe estar disponible en el classpath. </p>
+     * <p><b>Postcondiciï¿½n:</b> Si no ocurre una excepciï¿½n, conn y sentencia se inicializan correctamente 
+     * y la conexiï¿½n queda en modo auto-commit. </p>
      * 
      */
     
     private BDConexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.mariadb.jdbc.Driver");
         } catch (Exception e) {
             System.out.println("No se pudo cargar el puente JDBC-ODBC");
             return;
@@ -36,60 +36,61 @@ public class BDConexion {
         	this.sentencia=conn.createStatement();
         	this.conn.setAutoCommit(true);
         	
-        	assert conn != null : "La conexión no debería ser nula tras inicializar.";
-            assert sentencia != null : "La sentencia no debería ser nula tras inicializar.";
-            assert conn.getAutoCommit() : "La conexión debería estar en auto-commit.";
+        	assert conn != null : "La conexion no deberia ser nula tras inicializar.";
+            assert sentencia != null : "La sentencia no deberia ser nula tras inicializar.";
+            assert conn.getAutoCommit() : "La conexiï¿½n deberia estar en auto-commit.";
         }
         catch (Exception e) {
             System.out.println("No se pudo iniciar la conexion");
+            e.printStackTrace();
             return;
         }
         
     }
 
     /**
-     * Devuelve la instancia única del singleton, garantizando que la conexión sea válida.
+     * Devuelve la instancia ï¿½nica del singleton, garantizando que la conexiï¿½n sea vï¿½lida.
      *
-     * <p><b>Precondición:</b> Ninguna.</p>
-     * <p><b>Postcondición:</b> Se devuelve una instancia (no-nula) de BDConexion. Si existía una instancia previa con conexión cerrada,
-     * se intenta crear una nueva instancia con conexión abierta.</p>
+     * <p><b>Precondiciï¿½n:</b> Ninguna.</p>
+     * <p><b>Postcondiciï¿½n:</b> Se devuelve una instancia (no-nula) de BDConexion. Si existï¿½a una instancia previa con conexiï¿½n cerrada,
+     * se intenta crear una nueva instancia con conexiï¿½n abierta.</p>
      *
-     * @return instancia única de BDConexion
-     * @throws SQLException si ocurre un error al verificar o crear la conexión
+     * @return instancia ï¿½nica de BDConexion
+     * @throws SQLException si ocurre un error al verificar o crear la conexiï¿½n
      */
     public static synchronized BDConexion getInstance() throws SQLException {
         if (instance == null || instance.getConnection() == null || instance.getConnection().isClosed()) {
             instance = new BDConexion();
         }
         
-        assert instance != null : "La instancia BDConexion no debería ser nula.";
-        assert instance.getConnection() != null : "La conexión no debería ser nula en una instancia válida.";
+        assert instance != null : "La instancia BDConexion no deberï¿½a ser nula.";
+        assert instance.getConnection() != null : "La conexiï¿½n no deberï¿½a ser nula en una instancia vï¿½lida.";
 
         return instance;
     }
 
     /**
-     * Devuelve la conexión JDBC actual.
+     * Devuelve la conexiï¿½n JDBC actual.
      *
-     * <p><b>Precondición:</b> La instancia debería haber sido inicializada mediante getInstance() para garantizar
-     * que la conexión esté disponible.</p>
+     * <p><b>Precondiciï¿½n:</b> La instancia deberï¿½a haber sido inicializada mediante getInstance() para garantizar
+     * que la conexiï¿½n estï¿½ disponible.</p>
      *
-     * <p><b>Postcondición:</b> Se devuelve la referencia a conn (puede ser null si la inicialización falló).</p>
+     * <p><b>Postcondiciï¿½n:</b> Se devuelve la referencia a conn (puede ser null si la inicializaciï¿½n fallï¿½).</p>
      */
     public Connection getConnection() {
         return conn;
     }
     
     /**
-     * Devuelve el Statement asociado a la conexión.
+     * Devuelve el Statement asociado a la conexiï¿½n.
      *
-     * <p><b>Precondición:</b> La conexión debe estar activa para que la sentencia sea usable.</p>
+     * <p><b>Precondiciï¿½n:</b> La conexiï¿½n debe estar activa para que la sentencia sea usable.</p>
      *
-     * <p><b>Postcondición:</b> Se devuelve sentencia o null si no se creó.</p>
+     * <p><b>Postcondiciï¿½n:</b> Se devuelve sentencia o null si no se creï¿½.</p>
      */
     public Statement getSentencia() {
     	try {
-			assert conn != null && !conn.isClosed() : "No se puede obtener la sentencia si la conexión está cerrada.";
+			assert conn != null && !conn.isClosed() : "No se puede obtener la sentencia si la conexiï¿½n estï¿½ cerrada.";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -97,15 +98,15 @@ public class BDConexion {
 	}
 
     /**
-     * Cierra la conexión si está abierta.
+     * Cierra la conexiï¿½n si estï¿½ abierta.
      *
-     * <p><b>Precondición:</b> La instancia debe haber sido inicializada</p>
+     * <p><b>Precondiciï¿½n:</b> La instancia debe haber sido inicializada</p>
      *
-     * <p><b>Postcondición:</b>
+     * <p><b>Postcondiciï¿½n:</b>
      * <ul>
-     *   <li>Si conn no era nula ni estaba cerrada, queda cerrada tras ejecutar este método.</li>
-     *   <li>Tras cerrar la conexión, la invariante de estado que exige que sentencia sea usable ya no se cumple
-     *       (es decir, sentencia deja de ser utilizable mientras la conexión esté cerrada).</li>
+     *   <li>Si conn no era nula ni estaba cerrada, queda cerrada tras ejecutar este mï¿½todo.</li>
+     *   <li>Tras cerrar la conexiï¿½n, la invariante de estado que exige que sentencia sea usable ya no se cumple
+     *       (es decir, sentencia deja de ser utilizable mientras la conexiï¿½n estï¿½ cerrada).</li>
      * </ul>
      * </p>
      */
@@ -113,7 +114,7 @@ public class BDConexion {
         try {
             if (conn != null && !conn.isClosed()) 
             	conn.close();
-            assert conn == null || conn.isClosed() : "La conexión debería estar cerrada tras close().";
+            assert conn == null || conn.isClosed() : "La conexiï¿½n deberï¿½a estar cerrada tras close().";
         } 
         catch (SQLException e) {
             e.printStackTrace();

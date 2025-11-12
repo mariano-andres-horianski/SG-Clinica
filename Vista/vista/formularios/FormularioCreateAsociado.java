@@ -108,11 +108,4 @@ public class FormularioCreateAsociado extends JDialog {
         return cancelButton;
     }
 
-    // Método main opcional para probar el formulario aislado
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            FormularioCreateAsociado dialog = new FormularioCreateAsociado();
-            dialog.setVisible(true);
-        });
-    }
 }
