@@ -27,12 +27,10 @@ public class Asociado extends Persona implements Runnable {
             
             switch (accion) {
                 case 0:
-                    System.out.println(getNya() + " -> Pide atención a domicilio"); // temporal
                     clinica.notificarEvento(getNya() + " pidió atención a domicilio");
                     clinica.getAmbulancia().solicitarAtencionDomicilio(getNya());
                     break;
                 case 1:
-                    System.out.println(getNya() + " -> Pide traslado a clínica"); // temporal
                     clinica.notificarEvento(getNya() + " pidió traslado a la clínica");
                     clinica.getAmbulancia().solicitarTrasladoClinica(getNya());
                     break;

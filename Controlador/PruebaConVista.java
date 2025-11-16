@@ -16,11 +16,6 @@ public class PruebaConVista {
 
 		ActionListenerSimulacion controladorSimulacion = new ActionListenerSimulacion();
 		controladorSimulacion.setVentanaPrincipal(vista);
-		
-		System.out.println(clinica.mostrarAsociados());
-
-
-		System.out.println("============= SIMULACION =============");
 
 	}
 }

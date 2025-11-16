@@ -96,6 +96,9 @@ public class PanelSimulacion extends JPanel {
         btnComenzar.addActionListener(controladorSimulacion);
         btnMantenimiento.addActionListener(controladorSimulacion);
         btnFinalizar.addActionListener(controladorSimulacion);
+        
+        btnMantenimiento.setEnabled(false);
+        btnFinalizar.setEnabled(false);
 
         panel_botones.add(btnComenzar);
         panel_botones.add(btnMantenimiento);
@@ -118,7 +121,19 @@ public class PanelSimulacion extends JPanel {
     public void actualizarNumAsociados(String estado) {
         label_numAsocRegistrados.setText("  " + estado.toString());
     }
+    
+    public void comienzaSimulacion() {
+    	btnComenzar.setEnabled(false);
+		btnFinalizar.setEnabled(true);
+		btnMantenimiento.setEnabled(true);
+    }
 
+    public void finalizaSimulacion() {
+    	btnComenzar.setEnabled(true);
+		btnFinalizar.setEnabled(false);
+		btnMantenimiento.setEnabled(false);
+    }
+    
     public JButton getBtnMantenimiento() { return btnMantenimiento; }
     public JButton getBtnFinalizar() { return btnFinalizar; }
     public JButton getBtnComenzar() { return btnComenzar; }

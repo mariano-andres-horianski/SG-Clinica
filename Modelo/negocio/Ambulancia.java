@@ -81,14 +81,12 @@ public class Ambulancia {
 	}
 	
 	private void informar(String s) {
-		System.out.println("AMBULANCIA OCUPADA: " + s);
 		clinica.notificarAmbulanciaOcupada(s);
 		
 	}
 	
 	private void accesoDenegado(String s) {
 		String msg = "PEDIDO DENEGADO: " + s;
-		System.out.println(msg);
 		clinica.notificarEvento(msg);
 	}
 

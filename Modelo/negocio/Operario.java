@@ -11,7 +11,6 @@ public class Operario implements Runnable {
 	}
 
 	public void solicitarMantenimientoAmbulancia() {
-        System.out.println("Operario solicita mantenimiento");
         clinica.getAmbulancia().solicitarMantenimiento();
     }
 

@@ -11,6 +11,6 @@
 	<classpathentry kind="src" path="Persistencia"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Vista"/>
-	<classpathentry kind="lib" path="C:/Users/Usuario/Desktop/Programacion/Nuevo Workspace/SG-Clinica/lib/mariadb-java-client-3.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/FerchaS/Desktop/GS/Facu things/Plan nuevo/2º/2do CUATRI/Progra C/Libreria SQL/mariadb-java-client-3.5.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

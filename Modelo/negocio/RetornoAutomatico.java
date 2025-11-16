@@ -15,7 +15,6 @@ public class RetornoAutomatico implements Runnable {
     public void run() {
         while(clinica.isSimulacionActiva()) {
 
-            System.out.println("Evento: Retorno automatico solicitado por el sistema");
             clinica.notificarEvento("RETORNO: Retorno automático solicitado");
             ambulancia.retornoAutomatico();
             

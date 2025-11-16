@@ -100,12 +100,20 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 	
 	public void comenzarSimulacion() {
 		panelSimulacion.agregarEvento("Simulación iniciada.\n");
+		ventanaPrincipal.getBoton_navegacionAsociados().setEnabled(false);
+		ventanaPrincipal.getBoton_navegacionSimulacion().setEnabled(false);
+		ventanaPrincipal.getBoton_navegacionInicio().setEnabled(false);
+		panelSimulacion.comienzaSimulacion();
 		clinica.lanzarSimulacion();
 	}
 	
 	public void finalizarSimulacion() {
 		panelSimulacion.agregarEvento("Simulación finalizada.\n");
 		panelSimulacion.actualizarEstadoAmbulancia("  --");
+		ventanaPrincipal.getBoton_navegacionAsociados().setEnabled(true);
+		ventanaPrincipal.getBoton_navegacionSimulacion().setEnabled(true);
+		ventanaPrincipal.getBoton_navegacionInicio().setEnabled(true);
+		panelSimulacion.finalizaSimulacion();
 		clinica.finalizarSimulacion();
 	}
 
