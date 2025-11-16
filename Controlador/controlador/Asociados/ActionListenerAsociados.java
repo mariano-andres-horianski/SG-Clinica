@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import clinica.SingletonClinica;
 import persistencia.BasedeDatos.BDConexion;
 import persistencia.DAOAsociadoYDTO.AsociadoDAOMySQL;
 import persistencia.DAOAsociadoYDTO.AsociadoDTO;
@@ -26,8 +27,10 @@ import vista.formularios.FormularioUpdateAsociado;
 public class ActionListenerAsociados implements ActionListener {
 	private VentanaPrincipal ventanaPrincipal;
 	private AsociadoDAOMySQL BD;
-	
+	private PanelAsociados panelAsociados;
+	private SingletonClinica clinica; // necesario para usar el HashMap de asociados, porque el AsociadoDTO no es Runnable
 	public ActionListenerAsociados() {
+		this.clinica = SingletonClinica.getInstance();
 		try {
 			this.BD = new AsociadoDAOMySQL();
 		} catch (SQLException e) {
@@ -51,8 +54,9 @@ public class ActionListenerAsociados implements ActionListener {
 		String comando = e.getActionCommand().toUpperCase();
 		HashMap<String, AsociadoDTO> asociados;
 		PanelAsociados listado;
-		JPanel panelCentral;
+		JPanel panelCentral = ventanaPrincipal.getPanel_Central();;
 		CardLayout cl;
+		
 		switch(comando) {
 			case "INICIO":
 				JPanel panelInicio = new JPanel();
@@ -69,62 +73,57 @@ public class ActionListenerAsociados implements ActionListener {
 			    panelCentral.repaint();
 			    break;
 
-			case "CREATE"://el usuario hizo click en "guardar" en el formulario de Agregar asociado
-				AsociadoDTO nuevoSocio = (AsociadoDTO)e.getSource();
-				
-				try {
-					BD.agregar(nuevoSocio);
-				} catch (AsociadoExistenteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				asociados = BD.obtenerTodosMap();
-				listado = (PanelAsociados)this.ventanaPrincipal.getPanel_Central();
-				listado.refrescarTabla(asociados);
-				break;
+			case "CREATE"://usuario hizo click en "guardar" en el formulario de creacion
+			    AsociadoDTO nuevoSocio = (AsociadoDTO)e.getSource();
+
+			    try {
+			        BD.agregar(nuevoSocio);
+			    } catch (AsociadoExistenteException e1) {
+			        e1.printStackTrace();
+			    }
+
+			    // Actualizar tabla del panel ya creado
+			    asociados = BD.obtenerTodosMap();
+			    panelAsociados.refrescarTabla(asociados);
+			    break;
 			case "READ"://el usuario hizo click en el boton "asociados" para modificar el card layout, no hay pop up
 				//Modificar el panel central de la ventana principal para que contenga una lista de asociados
-				asociados= BD.obtenerTodosMap();
-				panelCentral = this.ventanaPrincipal.getPanel_Central();
-				listado = new PanelAsociados(asociados,this);//me falta pasarle los listeners
-				this.ventanaPrincipal.setPanel_Central(listado);
-				listado.getBtnAgregar().addMouseListener(new CreateListenerAsociados(this));
-				
-				String nombrePanel = "PANEL_ASOCIADOS";
-	            panelCentral.add(listado, nombrePanel);
-	            ///Creo un panel de cero y lo guardo en el panel central
-	            cl = (CardLayout) (panelCentral.getLayout());
-	            cl.show(panelCentral, nombrePanel);
-	            panelCentral.revalidate();
-	            panelCentral.repaint();
-				break;
+				asociados = BD.obtenerTodosMap();
+
+			    panelAsociados = new PanelAsociados(asociados, this);
+
+			    panelCentral = ventanaPrincipal.getPanel_Central();
+			    panelCentral.add(panelAsociados, "PANEL_ASOCIADOS");
+
+			    cl = (CardLayout) panelCentral.getLayout();
+			    cl.show(panelCentral, "PANEL_ASOCIADOS");
+
+			    panelAsociados.getBtnAgregar().addMouseListener(new CreateListenerAsociados(this));
+			    break;
 			case "UPDATE":
 				AsociadoDTO socio = (AsociadoDTO) e.getSource();
-				
 				try {
 					BD.actualizar(socio);
 				} catch (AsociadoNotFoundException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				asociados = BD.obtenerTodosMap();
-				listado = (PanelAsociados)this.ventanaPrincipal.getPanel_Central();
-				listado.refrescarTabla(asociados);
-				
-				break;
+
+			    asociados = BD.obtenerTodosMap();
+			    panelAsociados.refrescarTabla(asociados);  // ← ESTA ES LA LINEA CORRECTA
+			    break;
 			case "DELETE":
-				AsociadoDTO socioEliminado = (AsociadoDTO)e.getSource();
-				String DNI = socioEliminado.getDni();
-				
+			    AsociadoDTO socioEliminado = (AsociadoDTO)e.getSource();
 				try {
-					BD.eliminarPorDni(DNI);
+					BD.eliminarPorDni(socioEliminado.getDni());
 				} catch (AsociadoNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				asociados = BD.obtenerTodosMap();
-				listado = (PanelAsociados)this.ventanaPrincipal.getPanel_Central();
-				listado.refrescarTabla(asociados);
-				break;
+
+			    asociados = BD.obtenerTodosMap();
+			    panelAsociados.refrescarTabla(asociados);
+			    break;
 			case "SELECT_UPDATE":
 				FormularioUpdateAsociado form = new FormularioUpdateAsociado((AsociadoDTO)e.getSource(),this);
 				form.setLocationRelativeTo(null);

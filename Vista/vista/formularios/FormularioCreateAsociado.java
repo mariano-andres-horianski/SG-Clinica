@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controlador.Asociados.ActionListenerAsociados;
 import persistencia.DAOAsociadoYDTO.AsociadoDTO;
@@ -91,6 +93,10 @@ public class FormularioCreateAsociado extends JDialog {
         });
 
         cancelButton.addActionListener(e -> dispose());
+        
+        okButton.setEnabled(false); // desactivado al inicio
+
+        configurarValidacion();
     }
 
     // Getters (mismos nombres que antes)
@@ -124,6 +130,47 @@ public class FormularioCreateAsociado extends JDialog {
 
     public JButton getCancelButton() {
         return cancelButton;
+    }
+    private void validarFormulario() {
+        boolean datosValidos = true;
+
+        // Validar campos vacíos
+        if (textNYA.getText().trim().isEmpty()) datosValidos = false;
+        if (textDNI.getText().trim().isEmpty()) datosValidos = false;
+        if (textCiudad.getText().trim().isEmpty()) datosValidos = false;
+        if (textTelefono.getText().trim().isEmpty()) datosValidos = false;
+        if (textDomicilio.getText().trim().isEmpty()) datosValidos = false;
+
+        // Validar DNI numérico positivo
+        try {
+            int dni = Integer.parseInt(textDNI.getText().trim());
+            if (dni <= 0) datosValidos = false;
+        } catch (NumberFormatException ex) {
+            datosValidos = false;
+        }
+
+        // Validar teléfono numérico
+        try {
+            Long.parseLong(textTelefono.getText().trim());
+        } catch (NumberFormatException ex) {
+            datosValidos = false;
+        }
+
+        okButton.setEnabled(datosValidos);
+    }
+
+    private void configurarValidacion() {
+        DocumentListener listener = new DocumentListener() {
+            @Override public void insertUpdate(DocumentEvent e) { validarFormulario(); }
+            @Override public void removeUpdate(DocumentEvent e) { validarFormulario(); }
+            @Override public void changedUpdate(DocumentEvent e) { validarFormulario(); }
+        };
+
+        textNYA.getDocument().addDocumentListener(listener);
+        textDNI.getDocument().addDocumentListener(listener);
+        textCiudad.getDocument().addDocumentListener(listener);
+        textTelefono.getDocument().addDocumentListener(listener);
+        textDomicilio.getDocument().addDocumentListener(listener);
     }
 
 }

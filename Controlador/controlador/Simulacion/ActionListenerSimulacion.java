@@ -3,13 +3,20 @@ package controlador.Simulacion;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
 import clinica.*;
+import clinica.model.Domicilio;
 import controlador.Asociados.ReadListenerAsociados;
+import excepciones.AsociadoDuplicadoException;
+import negocio.Asociado;
+import persistencia.DAOAsociadoYDTO.AsociadoDAOMySQL;
+import persistencia.DAOAsociadoYDTO.AsociadoDTO;
 import vista.JframePrincipal.VentanaPrincipal;
 import vista.PanelCentral.PanelSimulacion;
 
@@ -18,10 +25,28 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 	private VentanaPrincipal ventanaPrincipal;
 	private PanelSimulacion panelSimulacion;
 	private SingletonClinica clinica;
+	private AsociadoDAOMySQL BD;
 
 	public ActionListenerSimulacion() {
 		this.clinica = SingletonClinica.getInstance();
+		try {
+			this.BD = new AsociadoDAOMySQL();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clinica.addObserver(this);
+		HashMap<String, AsociadoDTO> asociados = BD.obtenerTodosMap();
+		for(AsociadoDTO a: asociados.values()) {
+			Domicilio d = new Domicilio(a.getDomicilioStr(),0);
+			Asociado actual = new Asociado(a.getDni(),a.getNya(),a.getCiudad(),a.getTelefono(),d);
+			try {
+				clinica.registrarAsociado(actual);
+			} catch (AsociadoDuplicadoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
@@ -38,9 +63,19 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 		switch (comando) {
 
 			case "SIMULACION":
-				ventanaPrincipal.setPanel_Central(panelSimulacion);
-				panelSimulacion.actualizarNumAsociados(String.valueOf(clinica.getAsociados().size()));
-				break;
+				JPanel panelCentral = ventanaPrincipal.getPanel_Central();
+			    CardLayout cl = (CardLayout) panelCentral.getLayout();
+
+			    // Agregar solo si no existe ya
+			    if (panelSimulacion.getParent() == null) {
+			        panelCentral.add(panelSimulacion, "PANEL_SIMULACION");
+			    }
+
+			    cl.show(panelCentral, "PANEL_SIMULACION");
+
+			    // Actualizar datos
+			    panelSimulacion.actualizarNumAsociados(String.valueOf(clinica.getAsociados().size()));
+			    break;
 				
 			case "INICIAR_SIM":
 				if (!clinica.isSimulacionActiva())

@@ -1,6 +1,8 @@
 package vista.formularios;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import controlador.Asociados.ActionListenerAsociados;
 
@@ -58,6 +60,7 @@ public class FormularioUpdateAsociado extends JDialog {
         });
 
         btnCancelar.addActionListener(e -> dispose());
+        configurarValidacion();
     }
 
 	public JTextField getTxtDni() {
@@ -87,6 +90,36 @@ public class FormularioUpdateAsociado extends JDialog {
 	public JButton getBtnCancelar() {
 		return btnCancelar;
 	}
-    
+
+	private void validarFormulario() {
+	    boolean valido = true;
+
+	    if (txtNya.getText().trim().isEmpty()) valido = false;
+	    if (txtCiudad.getText().trim().isEmpty()) valido = false;
+	    if (txtTelefono.getText().trim().isEmpty()) valido = false;
+	    if (txtDomicilio.getText().trim().isEmpty()) valido = false;
+
+	    try {
+	        Long.parseLong(txtTelefono.getText());
+	    } catch (Exception e) {
+	        valido = false;
+	    }
+
+	    btnGuardar.setEnabled(valido);
+	}
+
+	private void configurarValidacion() {
+	    DocumentListener listener = new DocumentListener() {
+	        @Override public void insertUpdate(DocumentEvent e) { validarFormulario(); }
+	        @Override public void removeUpdate(DocumentEvent e) { validarFormulario(); }
+	        @Override public void changedUpdate(DocumentEvent e) { validarFormulario(); }
+	    };
+
+	    txtNya.getDocument().addDocumentListener(listener);
+	    txtCiudad.getDocument().addDocumentListener(listener);
+	    txtTelefono.getDocument().addDocumentListener(listener);
+	    txtDomicilio.getDocument().addDocumentListener(listener);
+	}
+
     
 }

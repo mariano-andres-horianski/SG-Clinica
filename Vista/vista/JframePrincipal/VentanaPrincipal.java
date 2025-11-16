@@ -75,12 +75,6 @@ public class VentanaPrincipal extends JFrame {
 		return panel_Central;
 	}
 
-	public void setPanel_Central(JPanel nuevo) {
-		panel_Central.removeAll();
-	    panel_Central.add(nuevo, "ACTUAL");
-	    panel_Central.revalidate();
-	    panel_Central.repaint();
-	}
 
 	/**
 	 * Create the frame.

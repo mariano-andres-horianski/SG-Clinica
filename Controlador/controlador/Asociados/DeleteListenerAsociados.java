@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import persistencia.DAOAsociadoYDTO.AsociadoDTO;
-
+/*
 public class DeleteListenerAsociados extends MouseAdapter{
 	private AsociadoDTO socio;
 	private ActionListenerAsociados controladorSocios;
@@ -35,3 +35,4 @@ public class DeleteListenerAsociados extends MouseAdapter{
         }
     }
 }
+*/
