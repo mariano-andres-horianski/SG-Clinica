@@ -79,10 +79,15 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 	 * 
 	 */
 	public void setVentanaPrincipal(VentanaPrincipal ventanaPrincipal) {
+		assert ventanaPrincipal != null : "Ventana principal no debe ser null";
+		
 		this.ventanaPrincipal = ventanaPrincipal;
 		this.ventanaPrincipal.setControladorSimulacion(this);
 		this.ventanaPrincipal.getBoton_navegacionSimulacion().addActionListener(this);
 		this.panelSimulacion = new PanelSimulacion(ventanaPrincipal.getControladorSimulacion());
+		
+		assert ventanaPrincipal.getControladorSimulacion() != this : "El controlador de la ventana principal no es este";
+		assert this.panelSimulacion != null : "panelSimulacion no fue iniciado correctamente";
 	}
 
 	
@@ -95,6 +100,7 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		assert e != null : "e no debe ser null";
 		String comando = e.getActionCommand().toUpperCase();
 		switch (comando) {
 
@@ -149,12 +155,14 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 	 * </pre>
 	 */
 	public void comenzarSimulacion() {
-		panelSimulacion.agregarEvento("Simulación iniciada.\n");
 		ventanaPrincipal.getBoton_navegacionAsociados().setEnabled(false);
 		ventanaPrincipal.getBoton_navegacionSimulacion().setEnabled(false);
 		ventanaPrincipal.getBoton_navegacionInicio().setEnabled(false);
 		panelSimulacion.comienzaSimulacion();
+		panelSimulacion.agregarEvento("Simulación iniciada.\n");
 		clinica.lanzarSimulacion();
+		
+		assert clinica.isSimulacionActiva() != false : "No se inicializó correctamente la simulación";
 	}
 	/**
 	 * Finaliza la simulación.
@@ -175,6 +183,8 @@ public class ActionListenerSimulacion implements ActionListener, Observer {
 		ventanaPrincipal.getBoton_navegacionInicio().setEnabled(true);
 		panelSimulacion.finalizaSimulacion();
 		clinica.finalizarSimulacion();
+		
+		assert clinica.isSimulacionActiva() != true : "No se finalizó correctamente la simulación";
 	}
 
 	/**

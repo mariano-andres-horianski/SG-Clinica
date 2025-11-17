@@ -22,6 +22,8 @@ public class Ambulancia {
 	public Ambulancia(SingletonClinica clinica) {
 		this.estado = new AmbulanciaStateDisponible(this);
 		this.clinica = clinica;
+		
+		assert this.estado != null : "No se inicializó correctamente el estado de la ambulancia";
 	}
 
 	/**
@@ -177,6 +179,7 @@ public class Ambulancia {
 	 * @param estado El nuevo objeto de estado. 
 	 */
 	public void setEstado(IAmbulanciaState estado) {
+		assert estado != null : "El estado no puede ser null";
 		this.estado = estado;
 		clinica.notificarCambioEstadoAmbulancia(estado.toString());
 	}

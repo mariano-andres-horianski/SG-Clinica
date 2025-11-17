@@ -162,6 +162,7 @@ public class PanelSimulacion extends JPanel {
     }
     
     public void comienzaSimulacion() {
+    	textAreaEventos.setText("");
     	btnComenzar.setEnabled(false);
 		btnFinalizar.setEnabled(true);
 		btnMantenimiento.setEnabled(true);

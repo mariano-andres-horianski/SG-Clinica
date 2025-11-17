@@ -11,7 +11,7 @@ public class BDConexion {
     private Connection conn;
     private Statement sentencia;
 
-    private String baseDatos = "jdbc:mariadb://localhost:3308/Grupo_8";
+    private String baseDatos = "jdbc:mariadb://localhost:3306/Grupo_8";
     private String usuario = "progra_c";
     private String password = "progra_c";
     
